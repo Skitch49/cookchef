@@ -19,4 +19,10 @@ ul {
 
 img {
   max-width: 100%;
+  user-select: none;
+}
+
+::placeholder,
+input {
+  font-family: var(--font-family);
 }
