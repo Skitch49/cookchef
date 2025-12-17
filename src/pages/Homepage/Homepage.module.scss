@@ -1,4 +1,4 @@
-@use "../assets/styles/mixins" as mixin;
+@use "../../assets/styles/mixins" as mixin;
 
 .grid {
   display: grid;
@@ -33,4 +33,13 @@
     border: none;
     outline: none;
   }
+}
+
+.small {
+  color: var(--gray-1);
+  font-weight: 500;
+  font-size: 12px;
+}
+.inputSearchBar {
+  width: 100%;
 }

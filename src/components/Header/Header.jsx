@@ -1,7 +1,7 @@
 import styles from "./Header.module.scss";
-import cookchef from "../assets/images/cookchef.png";
+import cookchef from "../../assets/images/cookchef.png";
 import { useState } from "react";
-import HeaderMenu from "./headerMenu";
+import HeaderMenu from "./components/HeaderMenu/headerMenu";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
