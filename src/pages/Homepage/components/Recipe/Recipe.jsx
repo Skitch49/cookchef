@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styles from "./Recipe.module.scss";
-import { ApiContext } from "../../../context/ApiContext";
+import { ApiContext } from "../../../../context/ApiContext";
 
 function Recipe({ toggleLikedRecipe, recipe: { _id, liked, title, image } }) {
   const BASE_URL_API = useContext(ApiContext);

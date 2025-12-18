@@ -1,8 +1,10 @@
 import Loading from "../../components/Loading/Loading.jsx";
+import { seedRecipes } from "../../data/seed.js";
 import { ApiContext } from "../../context/ApiContext.jsx";
 import styles from "./Homepage.module.scss";
-import Recipe from "./components/Recipe.jsx";
+import Recipe from "./components/Recipe/Recipe.jsx";
 import { Fragment, useContext, useEffect, useState } from "react";
+import Search from "./components/Search/Search.jsx";
 
 function Homepage() {
   const [searchBar, setSearchBar] = useState("");
@@ -26,6 +28,9 @@ function Homepage() {
           const newRecipes = await response.json();
           if (newRecipes.length < 18) {
             setHasMore(false);
+            if (newRecipes.length === 0 && page === 1) {
+              seedRecipes();
+            }
           }
           setRecipes((x) => [...x, ...newRecipes]);
         }
@@ -52,11 +57,6 @@ function Homepage() {
     );
   }
 
-  function handleSearchBar(event) {
-    const searchBar = event.target.value;
-    setSearchBar(searchBar.trim().toLowerCase());
-  }
-
   return (
     <>
       <div className="flex-fill container d-flex flex-column p-20">
@@ -67,17 +67,7 @@ function Homepage() {
         <div
           className={`card flex-fill d-flex flex-column p-20 mb-20 ${styles.contentCard}`}
         >
-          <div
-            className={`d-flex flex-row align-item-center my-30 ${styles.searchBar}`}
-          >
-            <i className="fa-solid fa-magnifying-glass mr-15"></i>
-            <input
-              onInput={handleSearchBar}
-              type="text"
-              placeholder="Rechercher"
-              className={styles.inputSearchBar}
-            />
-          </div>
+          <Search setSearchBar={setSearchBar} />
           {isLoading && !recipes.length ? (
             <Loading />
           ) : (
