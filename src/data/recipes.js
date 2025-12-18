@@ -23,30 +23,20 @@ export const data = [
     image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
   },
   {
+    title: "Bol de granola",
+    image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38",
+  },
+  {
     title: "Burger gourmet",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
-  },
-
-  {
-    title: "Spaghetti Carbonara",
-    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
   },
   {
     title: "Poulet rôti",
     image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086",
   },
   {
-    title: "Steak frites",
-    image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-  },
-
-  {
     title: "Ramen japonais",
     image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624",
-  },
-  {
-    title: "Sushi assortis",
-    image: "https://images.unsplash.com/photo-1553621042-f6e147245754",
   },
   {
     title: "Poké Bowl saumon",
@@ -56,19 +46,9 @@ export const data = [
     title: "Pad Thaï",
     image: "https://images.unsplash.com/photo-1585032226651-759b368d7246",
   },
-
-  {
-    title: "Salade César",
-    image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9",
-  },
   {
     title: "Samosa",
     image: "https://images.unsplash.com/photo-1601050690597-df0568f70950",
-  },
-
-  {
-    title: "Gâteau au chocolat",
-    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
   },
   {
     title: "Brownie au chocolat",
@@ -107,10 +87,6 @@ export const data = [
   {
     title: "Café latte",
     image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
-  },
-  {
-    title: "Bol de porridge",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
   },
   {
     title: "Pattes au pesto",

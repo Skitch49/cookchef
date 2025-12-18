@@ -1,4 +1,5 @@
 .recipe {
+  position: relative;
   border-radius: 20px;
   height: 400px;
   cursor: pointer;
@@ -8,6 +9,19 @@
     }
     .recipeTitle {
       color: var(--primary);
+    }
+  }
+  > i {
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.2s;
+    &:hover {
+      color: var(--danger);
     }
   }
 }

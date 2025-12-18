@@ -1,55 +1,25 @@
 import Loading from "../../components/Loading/Loading.jsx";
-import { seedRecipes } from "../../data/seed.js";
 import { ApiContext } from "../../context/ApiContext.jsx";
 import styles from "./Homepage.module.scss";
 import Recipe from "./components/Recipe/Recipe.jsx";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import Search from "./components/Search/Search.jsx";
+import useFetchData from "../../hooks/useFetchData.jsx";
 
 function Homepage() {
   const [searchBar, setSearchBar] = useState("");
-  const [recipes, setRecipes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
 
   const BASE_URL_API = useContext(ApiContext);
 
-  useEffect(() => {
-    let cancel = false;
-    document.title = "CookChef - Accueil";
-    async function getRecipes() {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `${BASE_URL_API}?skip=${(page - 1) * 18}&limit=${page * 18}`
-        );
-        if (response.ok && !cancel) {
-          const newRecipes = await response.json();
-          if (newRecipes.length < 18) {
-            setHasMore(false);
-            if (newRecipes.length === 0 && page === 1) {
-              seedRecipes();
-            }
-          }
-          setRecipes((x) => [...x, ...newRecipes]);
-        }
-      } catch (error) {
-        console.error(
-          "Erreur réseau lors de la récupération des recettes",
-          error.message
-        );
-      } finally {
-        if (!cancel) {
-          setIsLoading(false);
-        }
-      }
-    }
-    getRecipes();
-    return () => {
-      cancel = true;
-    };
-  }, [BASE_URL_API, page]);
+  const [[recipes, setRecipes], isLoading, hasMore] = useFetchData(
+    BASE_URL_API,
+    page
+  );
+
+  function deleteRecipe(_id) {
+    setRecipes(recipes.filter((r) => r._id !== _id));
+  }
 
   function updatedRecipe(updatedRecipe) {
     setRecipes(
@@ -81,6 +51,7 @@ function Homepage() {
                     <Recipe
                       recipe={recipe}
                       toggleLikedRecipe={updatedRecipe}
+                      deleteRecipe={deleteRecipe}
                     ></Recipe>
                   </Fragment>
                 ))}
