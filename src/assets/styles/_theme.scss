@@ -32,3 +32,21 @@
 .text-primary {
   color: var(--primary);
 }
+
+input {
+  padding: 10px 15px;
+  border: 2px solid var(--gray-2);
+  border-radius: 20px;
+  outline: none;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.form-error {
+  color: var(--danger);
+  font-weight: 500;
+  font-size: 12;
+}
