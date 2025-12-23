@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { getRecipes } from "../apis";
 
-export function useFetchData(url, page) {
-  const [data, setData] = useState([]);
+export function useFetchRecipes(page) {
+  const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -17,16 +18,15 @@ export function useFetchData(url, page) {
           queryParam.append("skip", (page - 1) * 18);
           queryParam.append("sort", "createdAt:-1");
         }
-        const response = await fetch(url + `?${queryParam}`);
-        if (response.ok && !cancel) {
-          const newData = await response.json();
 
-          setHasMore(newData.length === 18);
-
-          setData((x) =>
-            Array.isArray(newData) ? [...x, ...newData] : [...x, newData]
-          );
+        const fetchedRecipes = await getRecipes(queryParam);
+        if (!cancel) {
+          if (fetchedRecipes.length < 18) {
+            setHasMore((x) => [...x, fetchedRecipes]);
+          }
+          setRecipes;
         }
+        fetchedRecipes;
       } catch (e) {
         setError("Erreur: " + e);
       } finally {
@@ -37,9 +37,7 @@ export function useFetchData(url, page) {
     }
     fetchData();
     return () => (cancel = true);
-  }, [url, page]);
-  console.log(hasMore);
-  console.log(isLoading);
-  return [[data, setData], isLoading, hasMore, error];
+  }, [page]);
+  return [[recipes, setRecipes], isLoading, hasMore, error];
 }
-export default useFetchData;
+export default useFetchRecipes;

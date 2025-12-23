@@ -2,28 +2,26 @@ import styles from "./Header.module.scss";
 import cookchef from "../../assets/images/cookchef.png";
 import { useState } from "react";
 import HeaderMenu from "./components/HeaderMenu/headerMenu";
+import { NavLink } from "react-router";
 
-function Header({ setPage }) {
+function Header() {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
       <header className={`${styles.header} d-flex flex-row align-items-center`}>
         <div className="flex-fill ">
-          <img
-            onClick={() => setPage("homepage")}
-            src={cookchef}
-            alt="logo cookchef"
-          />
+          <NavLink to="/">
+            <img src={cookchef} alt="logo cookchef" />
+          </NavLink>
         </div>
         <ul className={styles.headerList}>
-          <button
-            className=" btn btn-primary mr-15"
-            onClick={() => setPage("admin")}
-          >
-            <i className="mr-5 fa-solid fa-plus"></i>
-            <span>Ajouter une recette</span>
-          </button>
+          <NavLink to="/admin">
+            <button className=" btn btn-primary mr-15">
+              <i className="mr-5 fa-solid fa-plus"></i>
+              <span>Ajouter une recette</span>
+            </button>
+          </NavLink>
           <button className="mr-15 btn btn-reverse-primary">
             <i className="fa-solid fa-heart mr-5"></i>
             <span>Wishlist</span>
@@ -40,7 +38,7 @@ function Header({ setPage }) {
         {showMenu && (
           <>
             <div onClick={() => setShowMenu(false)} className="calc"></div>
-            <HeaderMenu setPage={setPage} />
+            <HeaderMenu />
           </>
         )}
       </header>
