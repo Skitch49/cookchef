@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRecipes } from "../apis";
+import { seedRecipes } from "../data/seed";
 
 export function useFetchRecipes(page) {
   const [recipes, setRecipes] = useState([]);
@@ -7,9 +8,11 @@ export function useFetchRecipes(page) {
   const [error, setError] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
+  const LIMIT = 18;
+
   useEffect(() => {
     let cancel = false;
-    async function fetchData() {
+    async function fetchRecipes() {
       try {
         setIsLoading(true);
         const queryParam = new URLSearchParams();
@@ -17,16 +20,26 @@ export function useFetchRecipes(page) {
           queryParam.append("limit", 18);
           queryParam.append("skip", (page - 1) * 18);
           queryParam.append("sort", "createdAt:-1");
+        } else {
+          queryParam.append("sort", "createdAt:-1");
         }
 
         const fetchedRecipes = await getRecipes(queryParam);
+        console.log(fetchedRecipes.length);
+
         if (!cancel) {
-          if (fetchedRecipes.length < 18) {
-            setHasMore((x) => [...x, fetchedRecipes]);
+          setHasMore(fetchedRecipes.length === LIMIT);
+
+          if (fetchedRecipes.length == 0 && page == 1) {
+            console.log("fetchedRecipes.length == 0");
+            const newFetchedRecipes = await seedRecipes();
+            setHasMore(newFetchedRecipes.length === LIMIT);
+
+            setRecipes((x) => [...x, ...newFetchedRecipes]);
+          } else {
+            setRecipes((x) => [...x, ...fetchedRecipes]);
           }
-          setRecipes;
         }
-        fetchedRecipes;
       } catch (e) {
         setError("Erreur: " + e);
       } finally {
@@ -35,7 +48,7 @@ export function useFetchRecipes(page) {
         }
       }
     }
-    fetchData();
+    fetchRecipes();
     return () => (cancel = true);
   }, [page]);
   return [[recipes, setRecipes], isLoading, hasMore, error];

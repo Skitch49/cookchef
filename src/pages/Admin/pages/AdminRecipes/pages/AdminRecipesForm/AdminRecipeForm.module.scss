@@ -1,0 +1,14 @@
+.recipeForm {
+  width: 100%;
+  max-width: 600px;
+}
+.infoSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 10px;
+}

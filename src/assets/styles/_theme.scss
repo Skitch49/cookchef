@@ -4,6 +4,16 @@
   cursor: pointer;
 }
 
+.btn-danger {
+  background-color: var(--white);
+  color: var(--danger);
+  border: 2px solid var(--danger);
+  transition: 0.2s opacity;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: var(--white);

@@ -53,8 +53,8 @@ export async function createRecipe(newRecipe) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      body: JSON.stringify(newRecipe),
     },
+    body: JSON.stringify(newRecipe),
   });
   if (response.ok) {
     return response.json();

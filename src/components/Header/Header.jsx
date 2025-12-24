@@ -19,7 +19,7 @@ function Header() {
           <NavLink to="/admin">
             <button className=" btn btn-primary mr-15">
               <i className="mr-5 fa-solid fa-plus"></i>
-              <span>Ajouter une recette</span>
+              <span>Admin</span>
             </button>
           </NavLink>
           <button className="mr-15 btn btn-reverse-primary">
